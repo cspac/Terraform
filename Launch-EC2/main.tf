@@ -32,6 +32,5 @@ resource "aws_ebs_volume" "disks" {
 resource "aws_volume_attachment" "attach-vol" { 
   count       = length(var.vol_list) 
   device_name = var.vol_list[count.index] 
-  volume_id   = aws_ebs_volume.data-vol[count.index].id
-  
-  instance_id = aws_instance.ec2_tpz.id
+  volume_id   = aws_ebs_volume.disks[count.index].id
+  instance_id = aws_instance.new_ec2.id
